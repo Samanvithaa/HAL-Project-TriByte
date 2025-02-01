@@ -1,25 +1,46 @@
-/* General Styles */
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
+    
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background: rgb(143,228,238);
+    background: linear-gradient(90deg, rgba(143,228,238,1) 30%, rgba(27,188,210,1) 70%);
+    background-image: url('static/giff.gif');
+    background-size: cover;
 }
 
-/* Weather Card */
+.heading {
+    font-size: 5rem;
+    margin:60px 130px;
+    font-weight: bold;
+    color: rgb(255, 255, 255); 
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 5px rgb(255, 255, 255), 
+        0 0 10px rgb(255, 255, 255), 
+        0 0 20px #000000, 
+        0 0 40px #ffffff, 
+        0 0 80px #000000, 
+        2px 2px 3px rgba(255, 255, 255, 0.3),
+        4px 4px 6px rgba(255, 255, 255, 0.2);
+    transform: perspective(500px) rotateX(15deg) rotateY(1deg);
+    animation: flicker 1.5s infinite alternate;
+}
+
 .card {
-    background: white;
+    background: rgba(255, 255, 255, 0.6);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 280px;
+    margin: 10px 10px;
+    height: 210px;
+    
 }
-
-/* Search Bar */
 .search {
     display: flex;
     justify-content: center;
