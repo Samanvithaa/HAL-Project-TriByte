@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h2>Find Your Rental</h2>
+            <form action="/search" method="POST">
+                <label for="location" class="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter location" required>
+            
+                <div class="date-time">
+                    <div>
+                        <label for="pickup-date">Pickup</label>
+                        <input type="date" id="pickup-date" name="pickup-date" required>
+                        <input type="time" id="pickup-time" name="pickup-time" required>
+                    </div>
+                    <div>
+                        <label for="drop-date">Drop</label>
+                        <input type="date" id="drop-date" name="drop-date" required>
+                        <input type="time" id="drop-time" name="drop-time" required>
+                    </div>
+                </div>
+            
+                <div class="vehicle-options">
+                    <button type="button" class="vehicle-btn" id="car-btn">Car</button>
+                    <button type="button" class="vehicle-btn" id="bike-btn">Bike</button>
+                    <button type="button" class="vehicle-btn" id="cycle-btn">Cycle</button>
+                    <button type="button" class="vehicle-btn" id="other-btn">Scooty</button>
+                </div>
+            
+                <button type="submit">Search</button>
+            </form>
+            
+        </div>
+        <div class="banner">
+            <img src="/img/bike.jpg" alt="Car Rental Banner">
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.vehicle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>

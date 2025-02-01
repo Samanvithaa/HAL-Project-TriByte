@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rentals</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="rental-cards-container">
+        <% rentals.forEach(rental => { %> <!-- Loop through each rental -->
+            <div class="rental-card">
+                <div class="stock-left-box"><%= rental.stock %> Left</div> <!-- Stock left -->
+                <div class="rental-image">
+                    <img src="<%= rental.image_url %>" alt="<%= rental.vehicle_type %>"> <!-- Vehicle image -->
+                </div>
+                <div class="rental-details">
+                    <div class="company-name">
+                        <h3><%= rental.company_name %></h3> <!-- Company Name -->
+                    </div>
+                    <div class="features">
+                        <% rental.features.forEach(feature => { %> <!-- Loop through features -->
+                            <div class="feature"><%= feature %></div>
+                        <% }); %>
+                    </div>
+                    <div class="cost-and-button">
+                        <div class="cost">
+                            <p>₹<%= rental.cost %></p> <!-- Cost -->
+                        </div>
+                        <button class="rent-button">Rent</button> <!-- Rent button -->
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
