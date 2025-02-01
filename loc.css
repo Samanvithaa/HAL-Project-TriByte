@@ -1,0 +1,86 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* Weather Card */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* Search Bar */
+.search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}
+
+.search button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: #0056b3;
+}
+
+/* Weather Details */
+.weather {
+    font-size: 18px;
+}
+
+.temp {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.city {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Details Section */
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.col {
+    text-align: center;
+    flex: 1;
+}
+
+.col p {
+    margin: 5px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
