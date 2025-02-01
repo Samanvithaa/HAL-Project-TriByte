@@ -9,7 +9,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
-            background-color: #f4f4f4;
+            background: rgb(143,228,238);
+            background: linear-gradient(90deg, rgba(143,228,238,1) 30%, rgba(27,188,210,1) 70%);
         }
         .container {
             background: white;
@@ -18,28 +19,46 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
         }
-        select, .phrase-box, button {
+        select, .phrase-box, button, input {
             margin: 10px;
             padding: 10px;
             font-size: 16px;
         }
         .phrase-box {
-            background: #e0e0e0;
+            background: #bfeff4;
             border-radius: 5px;
             padding: 15px;
+        }
+        .translation-result {
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Traveler Translator</h2>
+
+        <!-- Language Selection -->
         <label for="languageSelect">Select Language:</label>
-        <select id="languageSelect" onchange="translatePhrases()">
+        <select id="languageSelect" onchange="toggleTextInput()">
             <option value="kn">Kannada</option>
             <option value="hi">Hindi</option>
             <option value="ta">Tamil</option>
             <option value="ml">Malayalam</option>
         </select>
+
+        <!-- Text Input for Translation -->
+        <div id="textInputSection" style="display:none; margin-top: 20px;">
+            <label for="textInput">Enter text to translate:</label>
+            <input type="text" id="textInput" placeholder="Type here...">
+            <button onclick="translateInputText()">Translate</button>
+            <div id="translatedText" class="translation-result"></div>
+        </div>
+
+        <br><br>
+
+        <!-- Most Common Phrases -->
         <div id="phrases"></div>
     </div>
 
@@ -55,14 +74,18 @@
             "I don’t understand": { kn: "Nanage arthavaguttilla", hi: "Mujhe samajh nahi a raha", ta: "Enakku puriyavillai", ml: "Enikk manasilavunnilla" },
             "Where is the nearest ATM?": { kn: "Hattirada ATM ellide?", hi: "Sabse najdeeki ATM kahan hai?", ta: "Arugilulla ATM enge?", ml: "Adutha ATM evideyayirikkunnu?" },
             "Can I get a taxi here?": { kn: "Illi taxi sigutthada?", hi: "Kya yahan taxi mil sakti hai?", ta: "Inge taxi kidaikkuma?", ml: "Ivide taxi labhikkumo?" }
-
         };
 
-        function translatePhrases() {
+        function toggleTextInput() {
             const selectedLanguage = document.getElementById("languageSelect").value;
+            const textInputSection = document.getElementById("textInputSection");
             const phrasesContainer = document.getElementById("phrases");
-            phrasesContainer.innerHTML = "";
+
+            // Show the input box for translation
+            textInputSection.style.display = 'block';
             
+            // Update the phrases for the selected language
+            phrasesContainer.innerHTML = "";
             for (let phrase in translations) {
                 let translatedText = translations[phrase][selectedLanguage];
                 let phraseBox = `<div class='phrase-box'><strong>${phrase}:</strong> ${translatedText} 
@@ -77,9 +100,16 @@
             speech.lang = lang === 'kn' ? 'kn-IN' : lang === 'hi' ? 'hi-IN' : lang === 'ta' ? 'ta-IN' : 'ml-IN';
             window.speechSynthesis.speak(speech);
         }
+
+        function translateInputText() {
+            let text = document.getElementById("textInput").value;
+            let selectedLanguage = document.getElementById("languageSelect").value;
+            if (text.trim() !== "") {
+                let translatedText = translations[text] ? translations[text][selectedLanguage] : "Translation not available";
+                document.getElementById("translatedText").innerHTML = `<p>${translatedText} <button onclick='speakText("${translatedText}", "${selectedLanguage}")'>🔊</button></p>`;
+            }
+        }
         
-        // Initialize with default language
-        translatePhrases();
     </script>
 </body>
 </html>
