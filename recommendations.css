@@ -1,0 +1,57 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 50px;
+    padding: 20px;
+    
+    border-radius: 10px;
+    background-image: url('travels.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 500px;
+    
+    box-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-left: 570px;
+}
+
+#details {
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-left: 550px;
+}
+
+#recommendations {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+    width: 300px;
+    margin-left: 550px;
+    
+}
+
+#recommendations li {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 300px;
+    
+}
+
+#recommendations li:hover {
+    transform: scale(1.02);
+    width: 300px;
+    color: #1e62c1ce;
+}
