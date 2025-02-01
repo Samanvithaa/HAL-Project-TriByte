@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Page</title>
+    <link rel="stylesheet" href="sr.css">
+</head>
+<body>
+    <h2>Rate Your Experience</h2>
+    <div class="card">
+        <div class="question" data-index="0">How was the service?</div>
+        <div class="stars" id="service"></div>
+
+        <div class="question" data-index="1">How was the food?</div>
+        <div class="stars" id="food"></div>
+
+        <div class="question" data-index="2">How was the ambiance?</div>
+        <div class="stars" id="ambiance"></div>
+        
+        <h3>Submit your feedback</h3>
+        <textarea id="additionalFeedback" placeholder="Additional feedback..." rows="4" cols="30"></textarea>
+        
+        <button onclick="submitFeedback()">Submit Feedback</button>
+        <p id="thanksMessage" style="display: none; color: green; font-weight: bold;">Thank you for your feedback!</p>
+    </div>
+
+    <script src="jr.js"></script>
+</body>
+</html>

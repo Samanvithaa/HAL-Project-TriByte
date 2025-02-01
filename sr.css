@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    background-image: url("plane.jfif");
+    background-blend-mode: lighten;
+    
+}
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: gray;
+}
+.star.selected {
+    color: gold;
+}
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+h2{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h3{
+    font-family: 'Times New Roman', Times, serif;
+}
