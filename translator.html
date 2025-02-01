@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveler Translator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        select, .phrase-box, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .phrase-box {
+            background: #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Traveler Translator</h2>
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect" onchange="translatePhrases()">
+            <option value="kn">Kannada</option>
+            <option value="hi">Hindi</option>
+            <option value="ta">Tamil</option>
+            <option value="ml">Malayalam</option>
+        </select>
+        <div id="phrases"></div>
+    </div>
+
+    <script>
+        const translations = {
+            "Hello / Greetings": { kn: "Namaskara", hi: "Namaste", ta: "Vanakkam", ml: "Namaskaram" },
+            "Thank You": { kn: "Dhanyavadagalu", hi: "Dhanyavad", ta: "Nandri", ml: "Nandi" },
+            "How much does this cost?": { kn: "Idu eshtu dubariyagide?", hi: "Yeh kitne ka hai?", ta: "Ithu evvalavu selvagum?", ml: "Ithinte vila ethra?" },
+            "Where is the nearest hotel?": { kn: "Hattirada hotel elli?", hi: "Sabse najdeeki hotel kahan hai?", ta: "Samipaththiya hotel engu?", ml: "Adutha hotel evideya?" },
+            "Can you help me?": { kn: "Neewu nanage sahaya madabahuda?", hi: "Kya aap meri madad kar sakte hain?", ta: "Neenga enakku uthavi mudiyuma?", ml: "Ningalku enikku sahayikkano?" },
+            "I need a doctor": { kn: "Nanage vaidyana avashyate ide", hi: "Mujhe doctor ki zaroorat hai", ta: "Enakku oru maruththuviyar thevai", ml: "Enikku oru doctor venam" },
+            "Where is the bus stop?": { kn: "Bus nildana ellide?", hi: "Bus stop kahan hai?", ta: "Perunthu nirutham engirku?", ml: "Bus stop evideyayirikkunnu?" },
+            "I don’t understand": { kn: "Nanage arthavaguttilla", hi: "Mujhe samajh nahi a raha", ta: "Enakku puriyavillai", ml: "Enikk manasilavunnilla" },
+            "Where is the nearest ATM?": { kn: "Hattirada ATM ellide?", hi: "Sabse najdeeki ATM kahan hai?", ta: "Arugilulla ATM enge?", ml: "Adutha ATM evideyayirikkunnu?" },
+            "Can I get a taxi here?": { kn: "Illi taxi sigutthada?", hi: "Kya yahan taxi mil sakti hai?", ta: "Inge taxi kidaikkuma?", ml: "Ivide taxi labhikkumo?" }
+
+        };
+
+        function translatePhrases() {
+            const selectedLanguage = document.getElementById("languageSelect").value;
+            const phrasesContainer = document.getElementById("phrases");
+            phrasesContainer.innerHTML = "";
+            
+            for (let phrase in translations) {
+                let translatedText = translations[phrase][selectedLanguage];
+                let phraseBox = `<div class='phrase-box'><strong>${phrase}:</strong> ${translatedText} 
+                <button onclick='speakText("${translatedText}", "${selectedLanguage}")'>🔊</button></div>`;
+                phrasesContainer.innerHTML += phraseBox;
+            }
+        }
+
+        function speakText(text, lang) {
+            let speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.lang = lang === 'kn' ? 'kn-IN' : lang === 'hi' ? 'hi-IN' : lang === 'ta' ? 'ta-IN' : 'ml-IN';
+            window.speechSynthesis.speak(speech);
+        }
+        
+        // Initialize with default language
+        translatePhrases();
+    </script>
+</body>
+</html>
