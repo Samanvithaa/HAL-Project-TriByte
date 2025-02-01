@@ -21,6 +21,7 @@ body {
     transform: perspective(500px) rotateX(15deg) rotateY(1deg);
     animation: flicker 1.5s infinite alternate;
     margin: 30px 450px;
+    z-index: 1000
 }
 
 .card {
@@ -105,6 +106,32 @@ body {
     margin-top: 30px 0px 0px 60px;
 }
 
+
+.emergency-btn {
+    width: 50px; /* Small circular size */
+    height: 50px;
+    background-color: red; /* Emergency color */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Makes it circular */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.emergency-btn:hover {
+    background-color: darkred;
+    transform: scale(1.1);
+}
 .feature-box {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
