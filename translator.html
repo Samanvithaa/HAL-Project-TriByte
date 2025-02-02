@@ -9,8 +9,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
-            background: rgb(143,228,238);
-            background: linear-gradient(90deg, rgba(143,228,238,1) 30%, rgba(27,188,210,1) 70%);
+            
+            background: linear-gradient(135deg, #d9e4f5, #f1f5ff);
         }
         .container {
             background: white;
@@ -25,7 +25,7 @@
             font-size: 16px;
         }
         .phrase-box {
-            background: #bfeff4;
+            background:linear-gradient(135deg, #d9e4f5, #f1f5ff);
             border-radius: 5px;
             padding: 15px;
         }
@@ -38,27 +38,13 @@
 <body>
     <div class="container">
         <h2>Traveler Translator</h2>
-
-        <!-- Language Selection -->
         <label for="languageSelect">Select Language:</label>
-        <select id="languageSelect" onchange="toggleTextInput()">
+        <select id="languageSelect" onchange="updatePhrases()">
             <option value="kn">Kannada</option>
             <option value="hi">Hindi</option>
             <option value="ta">Tamil</option>
             <option value="ml">Malayalam</option>
         </select>
-
-        <!-- Text Input for Translation -->
-        <div id="textInputSection" style="display:none; margin-top: 20px;">
-            <label for="textInput">Enter text to translate:</label>
-            <input type="text" id="textInput" placeholder="Type here...">
-            <button onclick="translateInputText()">Translate</button>
-            <div id="translatedText" class="translation-result"></div>
-        </div>
-
-        <br><br>
-
-        <!-- Most Common Phrases -->
         <div id="phrases"></div>
     </div>
 
@@ -69,27 +55,31 @@
             "How much does this cost?": { kn: "Idu eshtu dubariyagide?", hi: "Yeh kitne ka hai?", ta: "Ithu evvalavu selvagum?", ml: "Ithinte vila ethra?" },
             "Where is the nearest hotel?": { kn: "Hattirada hotel elli?", hi: "Sabse najdeeki hotel kahan hai?", ta: "Samipaththiya hotel engu?", ml: "Adutha hotel evideya?" },
             "Can you help me?": { kn: "Neewu nanage sahaya madabahuda?", hi: "Kya aap meri madad kar sakte hain?", ta: "Neenga enakku uthavi mudiyuma?", ml: "Ningalku enikku sahayikkano?" },
+            "I need water": { kn: "Nanage neeru beku", hi: "Mujhe paani chahiye", ta: "Enakku thanni thevai", ml: "Enikku vellam venam" },
+            "Where is the restroom?": { kn: "Shouchalaya elli?", hi: "Shauchalaya kahan hai?", ta: "Kallaangarathu enga irukku?", ml: "Toilet evideya?" },
+            "I am lost": { kn: "Naanu kaanabekagidde", hi: "Main kho gaya hoon", ta: "Naan izhandhu poiruken", ml: "Njan nashtappettu" },
             "I need a doctor": { kn: "Nanage vaidyana avashyate ide", hi: "Mujhe doctor ki zaroorat hai", ta: "Enakku oru maruththuviyar thevai", ml: "Enikku oru doctor venam" },
-            "Where is the bus stop?": { kn: "Bus nildana ellide?", hi: "Bus stop kahan hai?", ta: "Perunthu nirutham engirku?", ml: "Bus stop evideyayirikkunnu?" },
+            "Where is the police station?": { kn: "Police station elli ide?", hi: "Police station kahan hai?", ta: "Kaval nilaiyam engirku?", ml: "Police station evideya?" },
             "I don’t understand": { kn: "Nanage arthavaguttilla", hi: "Mujhe samajh nahi a raha", ta: "Enakku puriyavillai", ml: "Enikk manasilavunnilla" },
-            "Where is the nearest ATM?": { kn: "Hattirada ATM ellide?", hi: "Sabse najdeeki ATM kahan hai?", ta: "Arugilulla ATM enge?", ml: "Adutha ATM evideyayirikkunnu?" },
-            "Can I get a taxi here?": { kn: "Illi taxi sigutthada?", hi: "Kya yahan taxi mil sakti hai?", ta: "Inge taxi kidaikkuma?", ml: "Ivide taxi labhikkumo?" }
+            "Where is the bus stop?": { kn: "Bus nildana ellide?", hi: "Bus stop kahan hai?", ta: "Perunthu nirutham engirku?", ml: "Bus stop evideyayirikkunnu?" },
+            "Can I get a taxi here?": { kn: "Illi taxi sigutthada?", hi: "Kya yahan taxi mil sakti hai?", ta: "Inge taxi kidaikkuma?", ml: "Ivide taxi labhikkumo?" },
+            "I want food": { kn: "Nanage oota beku", hi: "Mujhe khana chahiye", ta: "Enakku unavu venum", ml: "Enikku bhakshanam venam" },
+            "Can you speak English?": { kn: "Neewu English mathanadabahuda?", hi: "Kya aap angrezi bol sakte hain?", ta: "Neenga angilam pesuveergala?", ml: "Ningal English samsarikumo?" }
         };
+        
 
-        function toggleTextInput() {
+        function updatePhrases() {
             const selectedLanguage = document.getElementById("languageSelect").value;
-            const textInputSection = document.getElementById("textInputSection");
             const phrasesContainer = document.getElementById("phrases");
-
-            // Show the input box for translation
-            textInputSection.style.display = 'block';
-            
-            // Update the phrases for the selected language
             phrasesContainer.innerHTML = "";
+            
             for (let phrase in translations) {
                 let translatedText = translations[phrase][selectedLanguage];
-                let phraseBox = `<div class='phrase-box'><strong>${phrase}:</strong> ${translatedText} 
-                <button onclick='speakText("${translatedText}", "${selectedLanguage}")'>🔊</button></div>`;
+                let phraseBox = `
+                    <div class='phrase-box'>
+                        <strong>${phrase}:</strong> ${translatedText} 
+                        <button class='speaker-btn' onclick='speakText("${translatedText}", "${selectedLanguage}")'>🔊</button>
+                    </div>`;
                 phrasesContainer.innerHTML += phraseBox;
             }
         }
@@ -100,16 +90,6 @@
             speech.lang = lang === 'kn' ? 'kn-IN' : lang === 'hi' ? 'hi-IN' : lang === 'ta' ? 'ta-IN' : 'ml-IN';
             window.speechSynthesis.speak(speech);
         }
-
-        function translateInputText() {
-            let text = document.getElementById("textInput").value;
-            let selectedLanguage = document.getElementById("languageSelect").value;
-            if (text.trim() !== "") {
-                let translatedText = translations[text] ? translations[text][selectedLanguage] : "Translation not available";
-                document.getElementById("translatedText").innerHTML = `<p>${translatedText} <button onclick='speakText("${translatedText}", "${selectedLanguage}")'>🔊</button></p>`;
-            }
-        }
-        
     </script>
 </body>
 </html>
